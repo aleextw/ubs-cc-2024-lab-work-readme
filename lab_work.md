@@ -26,8 +26,8 @@ Your input is sent as a list of 'old-fashioned' (markdown) tables for you to par
 3. The `Increment` column indicates how the number of cells grows every day
    - Constraints: Only addition or multiplication, operand can be integer `x` where `0 < x <= 100` or can be `count` itself
 4. The `Condition` column consists of three numbers
-   - The first number indicates the condition used to determine which lab the petri dish is passed to next
-   - The second number is the lab which this dish will be passed to if the number of cells in the dish (after incrementing) is divisble by the first number
+   - The condition consists of checking whether or not the updated cell count is perfectly divisble by the first number
+   - The second number is the lab which this dish will be passed to if the number of cells in the dish (after incrementing) satisfies the above condition
    - The third number is the lab which this dish will be passed to if the condition above is not satisfied 
 
 #### Example Input
