@@ -13,7 +13,9 @@ As the manager of these labs, you want to know which labs have been working the 
 
 Design an algorithm that tracks the number of petri dishes analysed by each lab, at intervals of 1000.
 
-Expose a `POST` endpoint `/lab-work` for us to verify!
+Expose a `POST` endpoint `/lab_work` for us to verify!
+
+Expected request mime-type: `application/json` Expected response mime-type: `application/json`
 
 ## Information
 
@@ -32,25 +34,28 @@ Your input is sent as a list of 'old-fashioned' (markdown) tables for you to par
 
 #### Example Input
 
-(The test case has been split into multiple lines for clarity)
+An example unformatted testcase could be:
 
 ```
 [
-   """
-   |Lab | Cell counts             | Increment     | Condition |
-   |----|-------------------------|---------------|-----------|
-   |0   | 98 89 52                | count * 2     | 5  6 1    |
-   |1   | 57 95 80 92 57 78       | count * 13    | 2  2 6    |
-   |2   | 82 74 97 75 51 92 83    | count + 5     | 19 7 5    |
-   |3   | 97 88 51 68 68 76       | count + 6     | 7  0 4    |
-   |4   | 63                      | count + 1     | 17 0 1    |
-   |5   | 94 91 51 63             | count + 4     | 13 4 3    |
-   |6   | 61 54 94 71 74 68 98 83 | count + 2     | 3  2 7    |
-   |7   | 90 56                   | count * count | 11 3 5    |
-   """,
+   "|Lab | Cell counts             | Increment     | Condition |\n|----|-------------------------|---------------|-----------|\n|0   | 98 89 52                | count * 2     | 5  6 1    |\n|1   | 57 95 80 92 57 78       | count * 13    | 2  2 6    |\n|2   | 82 74 97 75 51 92 83    | count + 5     | 19 7 5    |\n|3   | 97 88 51 68 68 76       | count + 6     | 7  0 4    |\n|4   | 63                      | count + 1     | 17 0 1    |\n|5   | 94 91 51 63             | count + 4     | 13 4 3    |\n|6   | 61 54 94 71 74 68 98 83 | count + 2     | 3  2 7    |\n|7   | 90 56                   | count * count | 11 3 5    |
+   ",
    ...
 ]
 ```
+
+The first testcase in the example above would then represent the following markdown table:
+
+|Lab | Cell counts             | Increment     | Condition |
+|----|-------------------------|---------------|-----------|
+|0   | 98 89 52                | count * 2     | 5  6 1    |
+|1   | 57 95 80 92 57 78       | count * 13    | 2  2 6    |
+|2   | 82 74 97 75 51 92 83    | count + 5     | 19 7 5    |
+|3   | 97 88 51 68 68 76       | count + 6     | 7  0 4    |
+|4   | 63                      | count + 1     | 17 0 1    |
+|5   | 94 91 51 63             | count + 4     | 13 4 3    |
+|6   | 61 54 94 71 74 68 98 83 | count + 2     | 3  2 7    |
+|7   | 90 56                   | count * count | 11 3 5    |
 
 ### Output
 
@@ -84,4 +89,39 @@ For each test case, partial marks will be given for each correct answer per iter
    "1000": [1732, 17233, 17293, 17456, 16746, 17243, 285, 1184],
    "2000": [3767, 34485, 34670, 35015, 33630, 34383, 601, 2349]
 }
+```
+
+### Testcase Elaboration
+
+The checking of each dish should be done in sequential order of the labs, i.e., lab 0's dishes are checked and passed around, then lab 1's dishes, ...
+
+Therefore, in the example given above, lab 0's dishes will be checked with the following results:
+
+- The dish with 98 cells gets doubled to 196, and since 196 isn't divisible by 5, it is passed to lab 1
+- The dish with 89 cells gets doubled to 178, and since 178 isn't divisible by 5, it is passed to lab 1
+- The dish with 52 cells gets doubled to 104, and since 104 isn't divisible by 5, it is passed to lab 1
+
+After checking lab 0's dishes, the table will look as follows:
+
+|Lab | Cell counts                    | Increment     | Condition |
+|----|--------------------------------|---------------|-----------|
+|0   |                                | count * 2     | 5  6 1    |
+|1   | 57 95 80 92 57 78 196 178 104  | count * 13    | 2  2 6    |
+|2   | 82 74 97 75 51 92 83           | count + 5     | 19 7 5    |
+|3   | 97 88 51 68 68 76              | count + 6     | 7  0 4    |
+|4   | 63                             | count + 1     | 17 0 1    |
+|5   | 94 91 51 63                    | count + 4     | 13 4 3    |
+|6   | 61 54 94 71 74 68 98 83        | count + 2     | 3  2 7    |
+|7   | 90 56                          | count * count | 11 3 5    |
+
+This process then repeats for labs 1 to 7.
+
+As a sanity check, you should get the following for the number of inspections done per lab after the first iteration:
+
+```
+[
+   {
+      "1": [3, 9, 13, 6, 7, 16, 11, 12]
+   }
+]
 ```
