@@ -32,6 +32,7 @@ Your input is sent as a list of 'old-fashioned' (markdown) tables for you to par
    - The condition consists of checking whether or not the updated cell count is perfectly divisble by the first number
    - The second number is the lab which this dish will be passed to if the number of cells in the dish (after incrementing) satisfies the above condition
    - The third number is the lab which this dish will be passed to if the condition above is not satisfied 
+   - Petri dishes will never be passed back to the same lab after evaluation (e.g., there will never be a condition for lab 1 that is `50 1 1`)
 
 #### Example Input
 
