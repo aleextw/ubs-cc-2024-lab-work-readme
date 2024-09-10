@@ -27,6 +27,7 @@ Your input is sent as a list of 'old-fashioned' (markdown) tables for you to par
    - Constraints: `0 < cell count < 10000`
 3. The `Increment` column indicates how the number of cells grows every day
    - Constraints: Only addition or multiplication, operand can be integer `x` where `0 < x <= 100` or can be `count` itself
+   - Expressions will only be of form `count * <number or count>` or `count + <number or count>`; there will never be nested expressions
 4. The `Condition` column consists of three numbers
    - The condition consists of checking whether or not the updated cell count is perfectly divisble by the first number
    - The second number is the lab which this dish will be passed to if the number of cells in the dish (after incrementing) satisfies the above condition
