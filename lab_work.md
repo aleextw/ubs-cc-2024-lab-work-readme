@@ -7,6 +7,8 @@ You are the manager of several labs, whose job is to observe several petri dishe
 - The number of cells in each dish increases by a certain amount (specified in your input).
 - Each lab goes in numerical order, recounting the number of cells in each dish, and based on the number of cells in that dish, passes it on to another lab for further analysis.
 
+> Note: The number of cells increaases before each evaluation, so a petri dish's cell count may increase more than once in a day)
+
 This process repeats for 10,000 days.
 
 As the manager of these labs, you want to know which labs have been working the hardest, and therefore want to know how many petri dishes each lab has analysed, at regular intervals.
