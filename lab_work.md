@@ -2,12 +2,12 @@
 
 ## Instructions
 
-You are the manager of several labs, whose job is to observe several petri dishes of yeast cells. Each lab is assigned a number of petri dishes with varying starting cell counts. Every day, two things occur:
+You are the manager of several labs, whose job is to observe several petri dishes of yeast cells. Each lab is assigned a number of petri dishes with varying starting cell counts. Every day, each lab recounts the cells in their dishes and passes it to another lab based on certain rules:
 
-- The number of cells in each dish increases by a certain amount (specified in your input).
-- Each lab goes in numerical order, recounting the number of cells in each dish, and based on the number of cells in that dish, passes it on to another lab for further analysis.
+- Before a dish's cells are counted, they are incremented by a certain amount (specified in your input).
+- Each lab goes in numerical order, recounting the number of cells in each dish, and based on the number of cells in that dish, passes it onto another lab for further analysis.
 
-> Note: The number of cells increaases before each evaluation, so a petri dish's cell count may increase more than once in a day)
+> Note: Since the number of cells increases before each evaluation, a petri dish's cell count may increase more than once in a day if it is passed to more than one lab)
 
 This process repeats for 10,000 days.
 
